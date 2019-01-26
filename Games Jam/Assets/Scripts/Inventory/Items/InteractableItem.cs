@@ -7,7 +7,6 @@ public class InteractableItem : MonoBehaviour
 
 	public void OnMouseDown()
 	{
-		Debug.Log("Object clicked.");
 		if (item.Inventory == null)
 		{
 			gameObject.SetActive(false);
@@ -24,7 +23,6 @@ public class InteractableItem : MonoBehaviour
 			if (inventorySlot != null && inventorySlot.SlotTransform != null)
 			{
 				transform.SetParent(inventorySlot.SlotTransform.RuntimeValue);
-				Debug.Log("Setting position to Vector3.zero");
 				transform.localPosition = Vector3.zero;
 				transform.localRotation = Quaternion.identity;
 			}
