@@ -8,6 +8,8 @@ public class CharacterMove : MonoBehaviour
 	float MovePosition;
 	float MoveDirection = 0f;
 
+	private List<Transform> Transforms;
+
 	private void Awake()
 	{
 		mainCamera = Camera.main;
@@ -28,6 +30,10 @@ public class CharacterMove : MonoBehaviour
 			{
 				MovePosition = hit.point.x;
 				MoveDirection = transform.position.x < MovePosition ? 1f : -1f;
+				foreach(Transform child in transform)
+				{
+					child.localScale = new Vector3(MoveDirection, child.localScale.y, child.localScale.z);
+				}
 			}
 		}
 	}
