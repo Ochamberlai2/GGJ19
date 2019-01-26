@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: 1
   m_EditorClassIdentifier: 
   SlotTransform: {fileID: 11400000, guid: 8825e3f6747348a4cb314d5dbce74fb6, type: 2}
-  startingItem: {fileID: 0}
+  startingItem: {fileID: 11400000, guid: 247d7cc91b3aad6489bdbc543093268b, type: 2}
