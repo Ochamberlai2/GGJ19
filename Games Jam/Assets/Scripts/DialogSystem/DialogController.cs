@@ -22,9 +22,8 @@ public class DialogController : MonoBehaviour
 
     void Start()
     {
-        CurrentFont = TextFont[0];
+        CurrentFont = TextFont[0]; //sets a default font. 
         OpenDialogTimeOut(0, 4); //just testing, delete this.
-        //OpenDialogWithName(2, "Tom");
 
     }
 
