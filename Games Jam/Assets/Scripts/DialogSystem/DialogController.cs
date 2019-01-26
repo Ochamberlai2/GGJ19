@@ -13,10 +13,30 @@ public class DialogController : MonoBehaviour
     private GameObject box;
     public GameObject DEBUG_infld;
 
+    private bool tmrOn;
+    private float tmr1;
+    private float tmr2;
+
     void Start()
     {
-        OpenDialog(0);
+        //OpenDialogTimeOut(0, 4); //just testing, delete this.
+        OpenDialogWithName(2, "Tom");
     }
+
+    public void Update()
+    {
+        if (tmrOn) //used for time out type of dialog pop-up.
+        {
+            tmr1 += Time.deltaTime;
+            if(tmr1 >= tmr2)
+            {
+                CloseDialog();
+                tmrOn = false;
+
+            }
+        }
+    }
+
 
     /*
        How to use:
@@ -29,11 +49,6 @@ public class DialogController : MonoBehaviour
         Canvas should be tagged "Canvas" just to avoid some random bugs.
 
     */
-    void Update()
-    {
-        
-    }
-
 
     public void OpenDialog(int ID)
     {
@@ -52,6 +67,10 @@ public class DialogController : MonoBehaviour
 
     public void CloseDialog()
     {
+        if (box == null)
+        {
+            return;
+        }
         Destroy(box, 1);
         box.GetComponent<Animator>().Play("MoveOut");
         box = null;
@@ -61,5 +80,42 @@ public class DialogController : MonoBehaviour
     {
         OpenDialog(int.Parse(DEBUG_infld.GetComponent<Text>().text));
     }
-    
+
+
+    public void OpenDialogTimeOut(int ID, float Time) //if necessery, you can trigger the dialog to last only for [Time] amount of time. (in seconds).
+    {
+        if (box != null)
+        {
+            CloseDialog();
+        }
+        var Canvas = GameObject.FindGameObjectWithTag("Canvas");
+        OutputText = DDB.GetComponent<DialogDatabase>().DialogsDict[ID];
+        box = Instantiate(DialogBoxPrefab, Canvas.transform.position, Canvas.transform.rotation);
+        box.transform.SetParent(Canvas.transform);
+        box.transform.GetChild(0).gameObject.GetComponent<Text>().text = OutputText;
+        box.GetComponent<Animator>().Play("MoveIn");
+        box.transform.localScale = new Vector3(18.96987f, 2.226429f, 0.576515f);
+        tmr2 = Time;
+        tmrOn = true;
+
+    }
+
+
+    public void OpenDialogWithName(int ID, string Name)
+    {
+        if (box != null)
+        {
+            CloseDialog();
+        }
+        var Canvas = GameObject.FindGameObjectWithTag("Canvas");
+        OutputText = DDB.GetComponent<DialogDatabase>().DialogsDict[ID];
+        var CharacterName = Name;
+        box = Instantiate(DialogBoxPrefab, Canvas.transform.position, Canvas.transform.rotation);
+        box.transform.SetParent(Canvas.transform);
+        box.transform.GetChild(0).gameObject.GetComponent<Text>().text = OutputText;
+        box.transform.GetChild(1).gameObject.GetComponent<Text>().text = CharacterName;
+        box.GetComponent<Animator>().Play("MoveIn");
+        box.transform.localScale = new Vector3(18.96987f, 2.226429f, 0.576515f);
+    }
+
 }
