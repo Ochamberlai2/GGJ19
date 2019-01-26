@@ -23,7 +23,7 @@ public class DialogController : MonoBehaviour
     void Start()
     {
         CurrentFont = TextFont[0]; //sets a default font. 
-        OpenDialogTimeOut(0, 4); //just testing, delete this.
+        OpenDialogTimeOut("Dramatic1", 4); //just testing, delete this.
 
     }
 
@@ -54,7 +54,7 @@ public class DialogController : MonoBehaviour
 
     */
 
-    public void OpenDialog(int ID)
+    public void OpenDialog(string ID)
     {
         if(box != null)
         {
@@ -81,18 +81,12 @@ public class DialogController : MonoBehaviour
         box = null;
     }
 
-    public void DEBUG_buttonPress() //Just for debug, delete in final game.
-    {
-        OpenDialog(int.Parse(DEBUG_infld.GetComponent<Text>().text));
-    }
+   
 
-    public void DEBUG_buttonPress2() //Just for debug, delete in final game.
-    {
-        SetFont(int.Parse(DEBUG_infld2.GetComponent<Text>().text));
-    }
+    
 
 
-    public void OpenDialogTimeOut(int ID, float Time) //if necessery, you can trigger the dialog to last only for [Time] amount of time. (in seconds).
+    public void OpenDialogTimeOut(string ID, float Time) //if necessery, you can trigger the dialog to last only for [Time] amount of time. (in seconds).
     {
         if (box != null)
         {
@@ -112,7 +106,7 @@ public class DialogController : MonoBehaviour
     }
 
 
-    public void OpenDialogWithName(int ID, string Name)
+    public void OpenDialogWithName(string ID, string Name)
     {
         if (box != null)
         {
