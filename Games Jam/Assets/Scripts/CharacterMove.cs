@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CharacterMove : MonoBehaviour
 {
+	
+	
 	private void FixedUpdate()
 	{
 		Run();
