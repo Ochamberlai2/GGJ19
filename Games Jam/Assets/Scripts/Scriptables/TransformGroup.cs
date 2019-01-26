@@ -2,17 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TransformGroup : MonoBehaviour
+[CreateAssetMenu(fileName = "New Transform Group", menuName = "TransformGroup")]
+public class TransformGroup : ScriptableObject
 {
-    [System.NonSerialized] private List<TransformVariable> transformVariables;
+    [System.NonSerialized] public List<Transform> Transforms = new List<Transform>();
 
-	public void Add(TransformVariable t)
+	public void Add(Transform t)
 	{
-		transformVariables.Add(t);
+		Transforms.Add(t);
 	}
 
-	public void Remove(TransformVariable t)
+	public void Remove(Transform t)
 	{
-		transformVariables.Remove(t);
+		Transforms.Remove(t);
+	}
+
+	public static implicit operator List<Transform>(TransformGroup tg)
+	{
+		return tg.Transforms;
 	}
 }

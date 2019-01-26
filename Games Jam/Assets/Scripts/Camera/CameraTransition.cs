@@ -8,7 +8,7 @@ public class CameraTransition : MonoBehaviour
     private float transitionSpeed = 2f;
 
     [SerializeField]
-    private List<Transform> cameraTransforms;
+    private TransformGroup cameraTransforms;
 
     private int currentTransformIndex = 0;
     private bool currentlyTransitioning;
@@ -17,7 +17,7 @@ public class CameraTransition : MonoBehaviour
     {
         int nextTransformIndex = currentTransformIndex + 1;
 
-        if (nextTransformIndex > cameraTransforms.Count)
+        if (nextTransformIndex > cameraTransforms.Transforms.Count)
         {
             ResetCamera();
             return;
@@ -25,10 +25,10 @@ public class CameraTransition : MonoBehaviour
 
 
         float startTime = Time.time;
-        float journeyLength = Vector3.Distance(cameraTransforms[currentTransformIndex].position, cameraTransforms[nextTransformIndex].position);
+        float journeyLength = Vector3.Distance(cameraTransforms.Transforms[currentTransformIndex].position, cameraTransforms.Transforms[nextTransformIndex].position);
         if(currentlyTransitioning == false)
         {
-            StartCoroutine(MoveCameraBetweenPoints(cameraTransforms[currentTransformIndex], cameraTransforms[nextTransformIndex], startTime, journeyLength));
+            StartCoroutine(MoveCameraBetweenPoints(cameraTransforms.Transforms[currentTransformIndex], cameraTransforms.Transforms[nextTransformIndex], startTime, journeyLength));
         }
         currentTransformIndex = nextTransformIndex;
 
@@ -53,7 +53,7 @@ public class CameraTransition : MonoBehaviour
 
     public void ResetCamera()
     {
-        transform.position = cameraTransforms[0].position;
+        transform.position = cameraTransforms.Transforms[0].position;
         currentTransformIndex = 0;
     }
 }

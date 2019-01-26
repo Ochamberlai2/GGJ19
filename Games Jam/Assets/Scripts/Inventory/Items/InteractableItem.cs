@@ -8,8 +8,11 @@ public class InteractableItem : MonoBehaviour
 	public void OnMouseDown()
 	{
 		InventorySlot inventorySlot = item.Inventory.FindSlotFromItem(item);
+
+		Debug.Log("Inventory Slot: " + inventorySlot);
 		if (inventorySlot != null && item.Consumable)
 		{
+			Debug.Log("Eating consumable");
 			inventorySlot.Item = null;
 			if (item.UseEvent != null)
 			{

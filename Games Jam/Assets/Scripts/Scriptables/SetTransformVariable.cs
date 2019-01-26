@@ -6,6 +6,11 @@ public class SetTransformVariable : MonoBehaviour
 
 	void Awake()
 	{
-		transformVariable.RuntimeValue = this.transform;
+		if (transformVariable == null)
+		{
+			Debug.LogWarning("No Transform Variable attached to object", gameObject);
+			return;
+		}
+		transformVariable.RuntimeValue = transform;
 	}
 }
