@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 465c883bac9964040a75bca48e57ceb7, type: 3}
   m_Name: 4
   m_EditorClassIdentifier: 
-  _inventoryItem: {fileID: 0}
+  SlotTransform: {fileID: 11400000, guid: 6a5e9bba39039814d907b06cb370d3b9, type: 2}
+  startingItem: {fileID: 0}

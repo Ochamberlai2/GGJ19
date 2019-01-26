@@ -12,6 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0b1afd787eda0249922fa9181b08800, type: 3}
   m_Name: Branch
   m_EditorClassIdentifier: 
-  inventory: {fileID: 11400000, guid: 2565cae58069f984386fc05aec24a472, type: 2}
+  Inventory: {fileID: 11400000, guid: 2565cae58069f984386fc05aec24a472, type: 2}
   UseEvent: {fileID: 0}
-  AssignedObject: {fileID: 0}

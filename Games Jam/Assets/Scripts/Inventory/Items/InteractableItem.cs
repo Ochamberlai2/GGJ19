@@ -5,19 +5,28 @@ public class InteractableItem : MonoBehaviour
 {
 	[SerializeField] private Item item;
 
-	private void Awake()
+	public void OnClick()
 	{
-		if (item == null)
+		if (item.Inventory == null)
 		{
-			Debug.LogWarning("MonoBehaviour Item has no Scriptable Object Item attached.", gameObject);
-			return;
+			gameObject.SetActive(false);
+			if (item.UseEvent != null)
+			{
+				item.UseEvent.Raise();
+			}
 		}
-		item.AssignedObject = this;
+		else
+		{
+			// add item to inventory
+			InventorySlot inventorySlot = item.Inventory.AddItem(item);
+			
+			if (inventorySlot != null && inventorySlot.SlotTransform != null)
+			{
+				transform.SetParent(inventorySlot.SlotTransform.RuntimeValue);
+				Debug.Log("Setting position to Vector3.zero");
+				transform.localPosition = Vector3.zero;
+				transform.localRotation = Quaternion.identity;
+			}
+		}
 	}
-
-	// private void Update()
-	// {
-		// // if clicked then...
-		// // item.OnClick();
-	// }
 }
