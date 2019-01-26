@@ -15,7 +15,8 @@ public class DialogController : MonoBehaviour
 
     void Start()
     {
-        OpenDialog(3);
+        //OpenDialog(1);
+        Debug.Log(DDB.GetComponent<DialogDatabase>().DialogsDict[1]);
     }
 
     void Update()
@@ -31,7 +32,7 @@ public class DialogController : MonoBehaviour
             CloseDialog();
         }
         var Canvas = GameObject.FindGameObjectWithTag("Canvas");
-        OutputText = DDB.GetComponent<DialogDatabase>().Dialogs[ID];
+        OutputText = DDB.GetComponent<DialogDatabase>().DialogsDict[ID];
         box = Instantiate(DialogBoxPrefab, Canvas.transform.position, Canvas.transform.rotation);
         box.transform.SetParent(Canvas.transform);
         box.transform.GetChild(0).gameObject.GetComponent<Text>().text = OutputText;
