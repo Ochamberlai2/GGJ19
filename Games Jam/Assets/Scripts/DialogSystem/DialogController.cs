@@ -23,7 +23,7 @@ public class DialogController : MonoBehaviour
     void Start()
     {
         CurrentFont = TextFont[0]; //sets a default font. 
-        OpenDialogTimeOut("Dramatic1", 4); //just testing, delete this.
+        OpenDialogTimeOut("SleepWorriesAway1", 4); //just testing, delete this.
 
     }
 
