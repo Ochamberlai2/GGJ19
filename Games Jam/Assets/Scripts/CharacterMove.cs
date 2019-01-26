@@ -8,12 +8,43 @@ public class CharacterMove : MonoBehaviour
 	float MovePosition;
 	float MoveDirection = 0f;
 
-	private List<Transform> Transforms;
+	private List<Transform> transforms;
+	private List<BodyAnimator> bodyAnimators;
+
+	private class BodyAnimator
+	{
+		public BodyAnimator(Animator anim)
+		{
+			this.Animator = anim;
+		}
+		private Animator _animator;
+		public Animator Animator
+		{
+			get
+			{
+				return _animator;
+			}
+			set
+			{
+				_animator = value;
+				RunningHash = Animator.StringToHash("Running");
+			}
+		}
+		public int RunningHash;
+	}
 
 	private void Awake()
 	{
+		bodyAnimators = new List<BodyAnimator>();
+
 		mainCamera = Camera.main;
 		MovePosition = transform.position.x;
+		var animators = GetComponentsInChildren<Animator>();
+		foreach (Animator anim in animators)
+		{
+			bodyAnimators.Add(new BodyAnimator(anim));
+		}
+
 	}
 
 	private void FixedUpdate()
@@ -50,6 +81,13 @@ public class CharacterMove : MonoBehaviour
 		else if (MoveDirection == -1f)
 		{
 			newPosition.x = Mathf.Max(newPosition.x, MovePosition);
+		}
+
+		bool moving = transform.position != newPosition;
+		
+		foreach(BodyAnimator bodyAnim in bodyAnimators)
+		{
+			bodyAnim.Animator.SetBool(bodyAnim.RunningHash, moving);
 		}
 
 		transform.position = newPosition;
