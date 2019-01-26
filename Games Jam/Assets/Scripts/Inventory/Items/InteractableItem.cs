@@ -5,8 +5,9 @@ public class InteractableItem : MonoBehaviour
 {
 	[SerializeField] private Item item;
 
-	public void OnClick()
+	public void OnMouseDown()
 	{
+		Debug.Log("Object clicked.");
 		if (item.Inventory == null)
 		{
 			gameObject.SetActive(false);
