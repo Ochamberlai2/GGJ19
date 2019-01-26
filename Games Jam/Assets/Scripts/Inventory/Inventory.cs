@@ -21,6 +21,18 @@ public class Inventory : ScriptableObject
 		return freeInventorySlot;
 	}
 
+	public bool HasItem(Item item)
+	{
+		foreach(InventorySlot inventorySlot in InventorySlots)
+		{
+			if (inventorySlot.Item == item)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 	private InventorySlot GetFreeInventorySlot()
 	{
 		foreach(InventorySlot inventorySlot in InventorySlots)

@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Inventory: {fileID: 11400000, guid: 2565cae58069f984386fc05aec24a472, type: 2}
   UseEvent: {fileID: 0}
+  Consumable: 1

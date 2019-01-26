@@ -7,13 +7,23 @@ public class InteractableItem : MonoBehaviour
 
 	public void OnMouseDown()
 	{
-		if (item.Inventory == null)
+		if (item.Inventory.HasItem(item) && item.Consumable)
 		{
-			gameObject.SetActive(false);
 			if (item.UseEvent != null)
 			{
 				item.UseEvent.Raise();
 			}
+			Destroy(gameObject);
+			return;
+		}
+
+		if (item.Inventory == null)
+		{
+			if (item.UseEvent != null)
+			{
+				item.UseEvent.Raise();
+			}
+			Destroy(gameObject);
 		}
 		else
 		{
