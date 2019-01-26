@@ -7,4 +7,5 @@ public class Item : ScriptableObject
 	public Inventory Inventory;
 	[Tooltip("The event that fires when this object is used.")]
 	public GameEvent UseEvent;
+	public bool Consumable;
 }

@@ -7,22 +7,34 @@ public class InteractableItem : MonoBehaviour
 
 	public void OnMouseDown()
 	{
-		if (item.Inventory == null)
+		InventorySlot inventorySlot = item.Inventory.FindSlotFromItem(item);
+		if (inventorySlot != null && item.Consumable)
 		{
-			gameObject.SetActive(false);
+			inventorySlot.Item = null;
 			if (item.UseEvent != null)
 			{
 				item.UseEvent.Raise();
 			}
+			Destroy(gameObject);
+			return;
+		}
+
+		if (item.Inventory == null)
+		{
+			if (item.UseEvent != null)
+			{
+				item.UseEvent.Raise();
+			}
+			Destroy(gameObject);
 		}
 		else
 		{
 			// add item to inventory
-			InventorySlot inventorySlot = item.Inventory.AddItem(item);
+			InventorySlot newInventorySlot = item.Inventory.AddItem(item);
 			
-			if (inventorySlot != null && inventorySlot.SlotTransform != null)
+			if (newInventorySlot != null && newInventorySlot.SlotTransform != null)
 			{
-				transform.SetParent(inventorySlot.SlotTransform.RuntimeValue);
+				transform.SetParent(newInventorySlot.SlotTransform.RuntimeValue);
 				transform.localPosition = Vector3.zero;
 				transform.localRotation = Quaternion.identity;
 			}
