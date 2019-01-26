@@ -7,11 +7,14 @@ using UnityEngine.UI;
 public class DialogController : MonoBehaviour
 {
     public GameObject DDB;
+    private Font CurrentFont;
+    public Font[] TextFont;
     private string OutputText;
     private int CurrentID;
     public GameObject DialogBoxPrefab;
     private GameObject box;
     public GameObject DEBUG_infld;
+    public GameObject DEBUG_infld2;
 
     private bool tmrOn;
     private float tmr1;
@@ -19,8 +22,10 @@ public class DialogController : MonoBehaviour
 
     void Start()
     {
-        //OpenDialogTimeOut(0, 4); //just testing, delete this.
-        OpenDialogWithName(2, "Tom");
+        CurrentFont = TextFont[0];
+        OpenDialogTimeOut(0, 4); //just testing, delete this.
+        //OpenDialogWithName(2, "Tom");
+
     }
 
     public void Update()
@@ -61,7 +66,8 @@ public class DialogController : MonoBehaviour
         box = Instantiate(DialogBoxPrefab, Canvas.transform.position, Canvas.transform.rotation);
         box.transform.SetParent(Canvas.transform);
         box.transform.GetChild(0).gameObject.GetComponent<Text>().text = OutputText;
-        box.GetComponent<Animator>().Play("MoveIn");
+        box.transform.GetChild(0).gameObject.GetComponent<Text>().font = CurrentFont;
+       box.GetComponent<Animator>().Play("MoveIn");
         box.transform.localScale = new Vector3(18.96987f, 2.226429f, 0.576515f); //this is just to fix some issue with scaling after parenting to canvas, please ignore.
     }
 
@@ -81,6 +87,11 @@ public class DialogController : MonoBehaviour
         OpenDialog(int.Parse(DEBUG_infld.GetComponent<Text>().text));
     }
 
+    public void DEBUG_buttonPress2() //Just for debug, delete in final game.
+    {
+        SetFont(int.Parse(DEBUG_infld2.GetComponent<Text>().text));
+    }
+
 
     public void OpenDialogTimeOut(int ID, float Time) //if necessery, you can trigger the dialog to last only for [Time] amount of time. (in seconds).
     {
@@ -93,6 +104,7 @@ public class DialogController : MonoBehaviour
         box = Instantiate(DialogBoxPrefab, Canvas.transform.position, Canvas.transform.rotation);
         box.transform.SetParent(Canvas.transform);
         box.transform.GetChild(0).gameObject.GetComponent<Text>().text = OutputText;
+        box.transform.GetChild(0).gameObject.GetComponent<Text>().font = CurrentFont;
         box.GetComponent<Animator>().Play("MoveIn");
         box.transform.localScale = new Vector3(18.96987f, 2.226429f, 0.576515f);
         tmr2 = Time;
@@ -113,9 +125,16 @@ public class DialogController : MonoBehaviour
         box = Instantiate(DialogBoxPrefab, Canvas.transform.position, Canvas.transform.rotation);
         box.transform.SetParent(Canvas.transform);
         box.transform.GetChild(0).gameObject.GetComponent<Text>().text = OutputText;
+        box.transform.GetChild(0).gameObject.GetComponent<Text>().font = CurrentFont;
         box.transform.GetChild(1).gameObject.GetComponent<Text>().text = CharacterName;
         box.GetComponent<Animator>().Play("MoveIn");
         box.transform.localScale = new Vector3(18.96987f, 2.226429f, 0.576515f);
+    }
+
+
+    public void SetFont(int FontIndex)
+    {
+        CurrentFont = TextFont[FontIndex];
     }
 
 }
