@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/InventoryScene.unity
+    guid: 9f8367997709d0343a9d1939cf28a453
   m_configObjects: {}
