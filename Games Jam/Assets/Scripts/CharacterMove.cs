@@ -11,6 +11,6 @@ public class CharacterMove : MonoBehaviour
 
 	private void Run()
 	{
-		transform.position = transform.position + Vector3.right * 2f * Time.fixedDeltaTime;
+		transform.position = transform.position + (Input.GetAxis("Horizontal") * Vector3.right * 2f * Time.fixedDeltaTime);
 	}
 }
