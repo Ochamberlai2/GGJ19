@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(menuName = "Character/Inventory Slot", fileName = "New Inventory Slot")]
-public class InventorySlot : ScriptableObject
+public class InventorySlot : ScriptableObject, ISerializationCallbackReceiver
 {
-	[SerializeField] private Item _inventoryItem;
+	public TransformVariable SlotTransform;
+	[SerializeField] private Item startingItem;
+	[System.NonSerialized] private Item _inventoryItem;
 
 	public delegate void AddItem(Item item);
 	public event AddItem OnAddItem;
@@ -16,7 +18,6 @@ public class InventorySlot : ScriptableObject
 		}
 		set
 		{
-			
 			if (_inventoryItem == value)
 			{
 				return;
@@ -25,5 +26,15 @@ public class InventorySlot : ScriptableObject
 			_inventoryItem = value;
 			OnAddItem?.Invoke(_inventoryItem);
 		}
+	}
+
+	public void OnBeforeSerialize()
+	{
+		_inventoryItem = startingItem;
+	}
+
+	public void OnAfterDeserialize()
+	{
+		
 	}
 }

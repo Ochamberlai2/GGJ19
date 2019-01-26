@@ -14,10 +14,11 @@ public class Inventory : ScriptableObject
 	/// Adds an item to the inventory.
 	/// </summary>
 	/// <param name="item">The item to add.</param>
-	public void AddItem(Item item)
+	public InventorySlot AddItem(Item item)
 	{
 		InventorySlot freeInventorySlot = GetFreeInventorySlot();
 		freeInventorySlot.Item = item;
+		return freeInventorySlot;
 	}
 
 	private InventorySlot GetFreeInventorySlot()
