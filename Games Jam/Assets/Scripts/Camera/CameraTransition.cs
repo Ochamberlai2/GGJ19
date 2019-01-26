@@ -8,16 +8,24 @@ public class CameraTransition : MonoBehaviour
     private float transitionSpeed = 2f;
 
     [SerializeField]
-    private TransformGroup cameraTransforms;
+    private List<Transform> cameraTransforms;
 
     private int currentTransformIndex = 0;
     private bool currentlyTransitioning;
 
+    public void Start()
+    {
+        if (cameraTransforms.Count == 0)
+            throw new System.Exception("There are no camera transform positions attributed to the camera");
+    }
     public void TransitionCamera()
     {
+
+       
+
         int nextTransformIndex = currentTransformIndex + 1;
 
-        if (nextTransformIndex > cameraTransforms.Transforms.Count)
+        if (nextTransformIndex > cameraTransforms.Count)
         {
             ResetCamera();
             return;
@@ -25,10 +33,10 @@ public class CameraTransition : MonoBehaviour
 
 
         float startTime = Time.time;
-        float journeyLength = Vector3.Distance(cameraTransforms.Transforms[currentTransformIndex].position, cameraTransforms.Transforms[nextTransformIndex].position);
-        if(currentlyTransitioning == false)
+        float journeyLength = Vector3.Distance(cameraTransforms[currentTransformIndex].position, cameraTransforms[nextTransformIndex].position);
+        if (currentlyTransitioning == false)
         {
-            StartCoroutine(MoveCameraBetweenPoints(cameraTransforms.Transforms[currentTransformIndex], cameraTransforms.Transforms[nextTransformIndex], startTime, journeyLength));
+            StartCoroutine(MoveCameraBetweenPoints(cameraTransforms[currentTransformIndex], cameraTransforms[nextTransformIndex], startTime, journeyLength));
         }
         currentTransformIndex = nextTransformIndex;
 
@@ -38,7 +46,7 @@ public class CameraTransition : MonoBehaviour
     private IEnumerator MoveCameraBetweenPoints(Transform startTransform, Transform destinationTransform, float startTime, float journeyLength)
     {
         currentlyTransitioning = true;
-        while(transform.position != destinationTransform.position)
+        while (transform.position != destinationTransform.position)
         {
             float distanceCovered = (Time.time - startTime) * transitionSpeed;
             float fractionJourneyCompleted = distanceCovered / journeyLength;
@@ -53,7 +61,7 @@ public class CameraTransition : MonoBehaviour
 
     public void ResetCamera()
     {
-        transform.position = cameraTransforms.Transforms[0].position;
+        transform.position = cameraTransforms[0].position;
         currentTransformIndex = 0;
     }
 }
