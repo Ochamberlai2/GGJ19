@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2590225143306121524}
   - component: {fileID: 4170588278968672838}
+  - component: {fileID: 1813463075}
   m_Layer: 0
   m_Name: Characters
   m_TagString: Untagged
@@ -46,6 +47,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c041c5982b5d8740be2073e95e7f2ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &1813463075
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2590225143306121525}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &899163157464107022
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -298,8 +315,7 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: -3
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2782215601818095377, guid: 447ba029ed81f0e498658ff9900b973a, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 447ba029ed81f0e498658ff9900b973a, type: 3}
 --- !u!4 &2590225142173049068 stripped
 Transform:
@@ -555,8 +571,7 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 4
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 331636503660865143, guid: b2c51f657333fb54189300525e22b663, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2c51f657333fb54189300525e22b663, type: 3}
 --- !u!4 &8814982650180200532 stripped
 Transform:
@@ -792,8 +807,7 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: -2
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 653335960737235113, guid: 68efdf3b97dbb714bb51cb3e5b51618c, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68efdf3b97dbb714bb51cb3e5b51618c, type: 3}
 --- !u!4 &8814982649222402689 stripped
 Transform:
