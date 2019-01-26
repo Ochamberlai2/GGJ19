@@ -15,10 +15,20 @@ public class DialogController : MonoBehaviour
 
     void Start()
     {
-        //OpenDialog(1);
-        Debug.Log(DDB.GetComponent<DialogDatabase>().DialogsDict[1]);
+        OpenDialog(0);
     }
 
+    /*
+       How to use:
+
+        reference this object's function OpenDialog(ID number). Each dialog has own unique
+        ID number, see list for reference. Box will close itself if another messege is triggered.
+        You can manually close the box by using CloseDialog().
+
+        Please note that all public references needs to be assigned in the inspector.
+        Canvas should be tagged "Canvas" just to avoid some random bugs.
+
+    */
     void Update()
     {
         
@@ -37,7 +47,7 @@ public class DialogController : MonoBehaviour
         box.transform.SetParent(Canvas.transform);
         box.transform.GetChild(0).gameObject.GetComponent<Text>().text = OutputText;
         box.GetComponent<Animator>().Play("MoveIn");
-        box.transform.localScale = new Vector3(18.96987f, 2.226429f, 0.576515f);
+        box.transform.localScale = new Vector3(18.96987f, 2.226429f, 0.576515f); //this is just to fix some issue with scaling after parenting to canvas, please ignore.
     }
 
     public void CloseDialog()
@@ -47,7 +57,7 @@ public class DialogController : MonoBehaviour
         box = null;
     }
 
-    public void DEBUG_buttonPress()
+    public void DEBUG_buttonPress() //Just for debug, delete in final game.
     {
         OpenDialog(int.Parse(DEBUG_infld.GetComponent<Text>().text));
     }
