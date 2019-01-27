@@ -18,13 +18,31 @@ MonoBehaviour:
     DialogueIndex: Narrative1
   - CameraTransform: {fileID: 0}
     OnEnterScene: {fileID: 0}
+    DialogueIndex: 
+  - CameraTransform: {fileID: 0}
+    OnEnterScene: {fileID: 0}
+    DialogueIndex: Narrative2
+  - CameraTransform: {fileID: 0}
+    OnEnterScene: {fileID: 0}
+    DialogueIndex: 
+  - CameraTransform: {fileID: 0}
+    OnEnterScene: {fileID: 0}
     DialogueIndex: SleepWorriesAway1
+  - CameraTransform: {fileID: 0}
+    OnEnterScene: {fileID: 0}
+    DialogueIndex: 
   - CameraTransform: {fileID: 0}
     OnEnterScene: {fileID: 0}
     DialogueIndex: SleepWorriesAway2
   - CameraTransform: {fileID: 0}
     OnEnterScene: {fileID: 0}
+    DialogueIndex: 
+  - CameraTransform: {fileID: 0}
+    OnEnterScene: {fileID: 0}
     DialogueIndex: DruggedUp1
   - CameraTransform: {fileID: 0}
     OnEnterScene: {fileID: 0}
-    DialogueIndex: DruggedUp2
+    DialogueIndex: 
+  - CameraTransform: {fileID: 0}
+    OnEnterScene: {fileID: 0}
+    DialogueIndex: Depression1

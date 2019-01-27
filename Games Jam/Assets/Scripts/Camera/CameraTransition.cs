@@ -18,7 +18,7 @@ public class CameraTransition : MonoBehaviour
         if (sceneViews.SceneViewList.Count == 0)
             throw new System.Exception("There are no camera transform positions attributed to the camera");
 		
-		DialogController.Instance.OpenDialog(sceneViews.SceneViewList[0].DialogueIndex);
+        DialogController.Instance.OpenDialog(sceneViews.SceneViewList[0].DialogueIndex);
     }
     public void TransitionCamera()
     {
@@ -41,6 +41,7 @@ public class CameraTransition : MonoBehaviour
 		float journeyLength = Vector3.Distance(startPos, endPos);
         if (currentlyTransitioning == false)
         {
+            StopAllCoroutines();
             StartCoroutine(MoveCameraBetweenPoints(sceneView1, sceneView2, startTime, journeyLength));
         }
         currentTransformIndex = nextTransformIndex;
@@ -60,7 +61,6 @@ public class CameraTransition : MonoBehaviour
         }
         currentlyTransitioning = false;
 		// do stuff here
-
 		DialogController.Instance.OpenDialog(sceneView2.DialogueIndex);
 		if (sceneView2.OnEnterScene != null)
 		{

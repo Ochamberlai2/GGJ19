@@ -117,12 +117,12 @@ public class CharacterMove : MonoBehaviour
 			return;
 		}
 
-		StartCoroutine(SwitchScene(deathScreen, 5f));
+		StartCoroutine(SwitchScene(sceneNameSwitchAfterDeath, 5f));
 	}
 
-	private IEnumerator SwitchScene(Scene switchScene, float seconds)
+	private IEnumerator SwitchScene(string sceneName, float seconds)
 	{
 		yield return new WaitForSeconds(seconds);
-		SceneManager.SetActiveScene(switchScene);
+		SceneManager.LoadScene(sceneName);
 	}
 }

@@ -63,12 +63,17 @@ public class DialogController : MonoBehaviour
 
     public void OpenDialog(string ID)
     {
-        if(box != null)
+        var DialogDatabase = DDB.GetComponent<DialogDatabase>();
+
+        if (!DialogDatabase.DialogsDict.ContainsKey(ID)) return;
+        
+        OutputText = DialogDatabase.DialogsDict[ID];
+        if (box != null)
         {
             CloseDialog();
         }
         var Canvas = GameObject.FindGameObjectWithTag("Canvas");
-        OutputText = DDB.GetComponent<DialogDatabase>().DialogsDict[ID];
+        
         box = Instantiate(DialogBoxPrefab, Canvas.transform.position, Canvas.transform.rotation);
 		box.transform.SetParent(Canvas.transform, true);
 		box.transform.localScale = new Vector3(18.96987f, 2.226429f, 0.576515f); //this is just to fix some issue with scaling after parenting to canvas, please ignore.
@@ -141,6 +146,8 @@ public class DialogController : MonoBehaviour
     private IEnumerator AnimateText(string DialogueText)
     {
         Text displayText = box.transform.GetChild(0).GetComponent<Text>();
+        if (displayText == null)
+            yield return null;
         string displayedtext = "";
         int currentDialogueIndex = 0;
         while (displayedtext != DialogueText)

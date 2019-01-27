@@ -8,13 +8,13 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 0
-    path: Assets/Scenes/InventoryScene.unity
-    guid: 9f8367997709d0343a9d1939cf28a453
   - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: 711003dd952c927409d6021c9b86aa5d
   - enabled: 1
     path: Assets/Scenes/Master.unity
     guid: 43c881395e058854c9884cdc094210d9
+  - enabled: 1
+    path: Assets/Scenes/DeathScreen.unity
+    guid: f6cc83dbd39c0c544baaef104ae1f22e
   m_configObjects: {}

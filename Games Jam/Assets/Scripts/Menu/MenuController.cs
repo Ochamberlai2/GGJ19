@@ -7,4 +7,9 @@ public class MenuController : MonoBehaviour
     {
         SceneManager.LoadScene("Master");
     }
+    public void GoToMenu()
+    {
+        SceneManager.LoadScene("Menu");
+
+    }
 }
