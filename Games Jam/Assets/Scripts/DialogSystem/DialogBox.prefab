@@ -106,15 +106,15 @@ RectTransform:
   m_GameObject: {fileID: 4849995092953729049}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.009803279, y: 0.08927223, z: 0.02901431}
+  m_LocalScale: {x: 0.009803279, y: 0.06249235, z: 0.02901431}
   m_Children: []
   m_Father: {fileID: 1344091800238570809}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10066, y: 1071}
+  m_AnchoredPosition: {x: 0, y: -6.3}
+  m_SizeDelta: {x: 9478.86, y: 1047}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7889461310218602292
 CanvasRenderer:
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -157,10 +157,13 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: This is place for text.This is place for text.This is place for text.This
-    is place for text.This is place for text.This is place for text.This is place
-    for text.This is place for text.This is place for text.This is place for text.This
-    is place for text.This is place for text.
+  m_Text: 'TEXTTEXTTEXTTEXTTEXT
+
+    TEXTTEXTTEXTTEXTTEXT
+
+    TEXTTEXTTEXTTEXT
+
+    TEXTTEXTTEXTTEXTTEXT'
 --- !u!1 &6739246310329589428
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,7 +192,7 @@ RectTransform:
   m_GameObject: {fileID: 6739246310329589428}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 18.969868, y: 2.226429, z: 0.576515}
+  m_LocalScale: {x: 18.969868, y: 3.1170006, z: 0.576515}
   m_Children:
   - {fileID: 1764639481771753725}
   - {fileID: 289036866706800827}
@@ -222,14 +225,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 60fe6e6dde0fc964d9ce28ffe9b707e6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
