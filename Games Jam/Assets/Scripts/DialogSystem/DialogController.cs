@@ -61,7 +61,6 @@ public class DialogController : MonoBehaviour
 
     public void OpenDialog(string ID)
     {
-		Debug.Log("Test");
         if(box != null)
         {
             CloseDialog();
