@@ -40,6 +40,7 @@ public class InteractableItem : MonoBehaviour
 				transform.SetParent(newInventorySlot.SlotTransform.RuntimeValue);
 				transform.localPosition = Vector3.zero;
 				transform.localRotation = Quaternion.identity;
+				transform.GetComponent<SpriteRenderer>().sortingLayerName = "Items_After";
 			}
 		}
 	}
