@@ -69,8 +69,9 @@ public class DialogController : MonoBehaviour
         var Canvas = GameObject.FindGameObjectWithTag("Canvas");
         OutputText = DDB.GetComponent<DialogDatabase>().DialogsDict[ID];
         box = Instantiate(DialogBoxPrefab, Canvas.transform.position, Canvas.transform.rotation);
-        box.transform.SetParent(Canvas.transform, true);
-        box.transform.GetChild(0).gameObject.GetComponent<Text>().text = OutputText;
+		box.transform.SetParent(Canvas.transform, true);
+		box.transform.localScale = new Vector3(18.96987f, 2.226429f, 0.576515f); //this is just to fix some issue with scaling after parenting to canvas, please ignore.
+		box.transform.GetChild(0).gameObject.GetComponent<Text>().text = OutputText;
         box.transform.GetChild(0).gameObject.GetComponent<Text>().font = CurrentFont;
         box.GetComponent<Animator>().Play("MoveIn");
     }
@@ -100,13 +101,13 @@ public class DialogController : MonoBehaviour
         var Canvas = GameObject.FindGameObjectWithTag("Canvas");
         OutputText = DDB.GetComponent<DialogDatabase>().DialogsDict[ID];
         box = Instantiate(DialogBoxPrefab, Canvas.transform.position, Canvas.transform.rotation);
-        box.transform.SetParent(Canvas.transform, true);
-        box.transform.GetChild(0).gameObject.GetComponent<Text>().text = OutputText;
+		box.transform.SetParent(Canvas.transform, true);
+		box.transform.localScale = new Vector3(18.96987f, 2.226429f, 0.576515f); //this is just to fix some issue with scaling after parenting to canvas, please ignore.
+		box.transform.GetChild(0).gameObject.GetComponent<Text>().text = OutputText;
         box.transform.GetChild(0).gameObject.GetComponent<Text>().font = CurrentFont;
         box.GetComponent<Animator>().Play("MoveIn");
         tmr2 = Time;
         tmrOn = true;
-
     }
 
 
@@ -120,8 +121,9 @@ public class DialogController : MonoBehaviour
         OutputText = DDB.GetComponent<DialogDatabase>().DialogsDict[ID];
         var CharacterName = Name;
         box = Instantiate(DialogBoxPrefab, Canvas.transform.position, Canvas.transform.rotation);
-        box.transform.SetParent(Canvas.transform, true);
-        box.transform.GetChild(0).gameObject.GetComponent<Text>().text = OutputText;
+		box.transform.SetParent(Canvas.transform, true);
+		box.transform.localScale = new Vector3(18.96987f, 2.226429f, 0.576515f); //this is just to fix some issue with scaling after parenting to canvas, please ignore.
+		box.transform.GetChild(0).gameObject.GetComponent<Text>().text = OutputText;
         box.transform.GetChild(0).gameObject.GetComponent<Text>().font = CurrentFont;
         box.transform.GetChild(1).gameObject.GetComponent<Text>().text = CharacterName;
         box.GetComponent<Animator>().Play("MoveIn");
