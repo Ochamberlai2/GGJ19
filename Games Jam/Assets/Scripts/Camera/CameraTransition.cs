@@ -8,24 +8,23 @@ public class CameraTransition : MonoBehaviour
     private float transitionSpeed = 2f;
 
     [SerializeField]
-    private List<Transform> cameraTransforms;
+    private SceneViews sceneViews;
 
     private int currentTransformIndex = 0;
     private bool currentlyTransitioning;
 
     public void Start()
     {
-        if (cameraTransforms.Count == 0)
+        if (sceneViews.SceneViewList.Count == 0)
             throw new System.Exception("There are no camera transform positions attributed to the camera");
+		
+		DialogController.Instance.OpenDialog(sceneViews.SceneViewList[0].DialogueIndex);
     }
     public void TransitionCamera()
     {
-
-       
-
         int nextTransformIndex = currentTransformIndex + 1;
 
-        if (nextTransformIndex > cameraTransforms.Count)
+        if (nextTransformIndex > sceneViews.SceneViewList.Count)
         {
             ResetCamera();
             return;
@@ -33,35 +32,46 @@ public class CameraTransition : MonoBehaviour
 
 
         float startTime = Time.time;
-        float journeyLength = Vector3.Distance(cameraTransforms[currentTransformIndex].position, cameraTransforms[nextTransformIndex].position);
+		SceneView sceneView1 = sceneViews.SceneViewList[currentTransformIndex];
+		SceneView sceneView2 = sceneViews.SceneViewList[nextTransformIndex];
+
+		Vector3 startPos = sceneView1.CameraTransform.position;
+		Vector3 endPos = sceneView2.CameraTransform.position;
+
+		float journeyLength = Vector3.Distance(startPos, endPos);
         if (currentlyTransitioning == false)
         {
-            StartCoroutine(MoveCameraBetweenPoints(cameraTransforms[currentTransformIndex], cameraTransforms[nextTransformIndex], startTime, journeyLength));
+            StartCoroutine(MoveCameraBetweenPoints(sceneView1, sceneView2, startTime, journeyLength));
         }
         currentTransformIndex = nextTransformIndex;
 
-
     }
 
-    private IEnumerator MoveCameraBetweenPoints(Transform startTransform, Transform destinationTransform, float startTime, float journeyLength)
+    private IEnumerator MoveCameraBetweenPoints(SceneView sceneView1, SceneView sceneView2, float startTime, float journeyLength)
     {
         currentlyTransitioning = true;
-        while (transform.position != destinationTransform.position)
+        while (transform.position != sceneView2.CameraTransform.position)
         {
             float distanceCovered = (Time.time - startTime) * transitionSpeed;
             float fractionJourneyCompleted = distanceCovered / journeyLength;
 
-            transform.position = Vector3.Lerp(startTransform.position, destinationTransform.position, fractionJourneyCompleted);
+            transform.position = Vector3.Lerp(sceneView1.CameraTransform.position, sceneView2.CameraTransform.position, fractionJourneyCompleted);
             yield return null;
         }
         currentlyTransitioning = false;
-        yield return null;
+		// do stuff here
+
+		DialogController.Instance.OpenDialog(sceneView2.DialogueIndex);
+		if (sceneView2.OnEnterScene != null)
+		{
+			sceneView2.OnEnterScene.Raise();
+		}
     }
 
 
     public void ResetCamera()
     {
-        transform.position = cameraTransforms[0].position;
+        transform.position = sceneViews.SceneViewList[0].CameraTransform.position;
         currentTransformIndex = 0;
     }
 }
