@@ -1,12 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CharacterMove : MonoBehaviour
 {
+	[SerializeField] private string sceneNameSwitchAfterDeath;
+	
 	Camera mainCamera;
 	float MovePosition;
 	float MoveDirection = 0f;
+
+	private bool Dead;
 
 	private List<Transform> transforms;
 	private List<BodyAnimator> bodyAnimators;
@@ -28,9 +33,11 @@ public class CharacterMove : MonoBehaviour
 			{
 				_animator = value;
 				RunningHash = Animator.StringToHash("Running");
+				DeadHash = Animator.StringToHash("Dead");
 			}
 		}
 		public int RunningHash;
+		public int DeadHash;
 	}
 
 	private void Awake()
@@ -49,11 +56,13 @@ public class CharacterMove : MonoBehaviour
 
 	private void FixedUpdate()
 	{
+		if (Dead) return;
 		Run();
 	}
 
 	private void Update()
 	{
+		if (Dead) return;
 		if (Input.GetMouseButtonDown(0))
 		{
 			RaycastHit2D hit = Physics2D.Raycast(mainCamera.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
@@ -91,5 +100,29 @@ public class CharacterMove : MonoBehaviour
 		}
 
 		transform.position = newPosition;
+	}
+
+	public void Die()
+	{
+		Dead = true;
+		foreach (BodyAnimator bodyAnim in bodyAnimators)
+		{
+			bodyAnim.Animator.SetBool(bodyAnim.DeadHash, true);
+		}
+		
+		Scene deathScreen = SceneManager.GetSceneByName(sceneNameSwitchAfterDeath);
+		if (deathScreen == null)
+		{
+			Debug.LogWarning("No death screen.");
+			return;
+		}
+
+		StartCoroutine(SwitchScene(deathScreen, 5f));
+	}
+
+	private IEnumerator SwitchScene(Scene switchScene, float seconds)
+	{
+		yield return new WaitForSeconds(seconds);
+		SceneManager.SetActiveScene(switchScene);
 	}
 }
