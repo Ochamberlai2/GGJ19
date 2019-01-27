@@ -17,6 +17,8 @@ public class DialogController : MonoBehaviour
     private bool tmrOn;
     private float tmr1;
     private float tmr2;
+    [SerializeField]
+    private float textAnimatePauseTime = 0.2f;
 
 	public static DialogController Instance;
 
@@ -70,7 +72,8 @@ public class DialogController : MonoBehaviour
         box = Instantiate(DialogBoxPrefab, Canvas.transform.position, Canvas.transform.rotation);
 		box.transform.SetParent(Canvas.transform, true);
 		box.transform.localScale = new Vector3(18.96987f, 2.226429f, 0.576515f); //this is just to fix some issue with scaling after parenting to canvas, please ignore.
-		box.transform.GetChild(0).gameObject.GetComponent<Text>().text = OutputText;
+        StopAllCoroutines();
+        StartCoroutine(AnimateText(OutputText));
         box.transform.GetChild(0).gameObject.GetComponent<Text>().font = CurrentFont;
         box.GetComponent<Animator>().Play("MoveIn");
     }
@@ -102,7 +105,8 @@ public class DialogController : MonoBehaviour
         box = Instantiate(DialogBoxPrefab, Canvas.transform.position, Canvas.transform.rotation);
 		box.transform.SetParent(Canvas.transform, true);
 		box.transform.localScale = new Vector3(18.96987f, 2.226429f, 0.576515f); //this is just to fix some issue with scaling after parenting to canvas, please ignore.
-		box.transform.GetChild(0).gameObject.GetComponent<Text>().text = OutputText;
+        StopAllCoroutines();
+        StartCoroutine(AnimateText(OutputText));
         box.transform.GetChild(0).gameObject.GetComponent<Text>().font = CurrentFont;
         box.GetComponent<Animator>().Play("MoveIn");
         tmr2 = Time;
@@ -122,7 +126,8 @@ public class DialogController : MonoBehaviour
         box = Instantiate(DialogBoxPrefab, Canvas.transform.position, Canvas.transform.rotation);
 		box.transform.SetParent(Canvas.transform, true);
 		box.transform.localScale = new Vector3(18.96987f, 2.226429f, 0.576515f); //this is just to fix some issue with scaling after parenting to canvas, please ignore.
-		box.transform.GetChild(0).gameObject.GetComponent<Text>().text = OutputText;
+        StopAllCoroutines();
+        StartCoroutine(AnimateText(OutputText));
         box.transform.GetChild(0).gameObject.GetComponent<Text>().font = CurrentFont;
         box.transform.GetChild(1).gameObject.GetComponent<Text>().text = CharacterName;
         box.GetComponent<Animator>().Play("MoveIn");
@@ -133,4 +138,18 @@ public class DialogController : MonoBehaviour
         CurrentFont = TextFont[FontIndex];
     }
 
+    private IEnumerator AnimateText(string DialogueText)
+    {
+        Text displayText = box.transform.GetChild(0).GetComponent<Text>();
+        string displayedtext = "";
+        int currentDialogueIndex = 0;
+        while (displayedtext != DialogueText)
+        {
+            displayedtext += DialogueText[currentDialogueIndex];
+            displayText.text = displayedtext;
+            currentDialogueIndex++;
+            yield return new WaitForSeconds(textAnimatePauseTime);
+        }
+        yield return null;
+    }
 }
