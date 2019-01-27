@@ -7,18 +7,9 @@ public class InteractableItem : MonoBehaviour
 
 	public void OnMouseDown()
 	{
-		InventorySlot inventorySlot = item.Inventory.FindSlotFromItem(item);
-
-		Debug.Log("Inventory Slot: " + inventorySlot);
-		if (inventorySlot != null && item.Consumable)
+		if (item == null)
 		{
-			Debug.Log("Eating consumable");
-			inventorySlot.Item = null;
-			if (item.UseEvent != null)
-			{
-				item.UseEvent.Raise();
-			}
-			Destroy(gameObject);
+			Debug.LogWarning("Item doesn't have item scriptable object attached.");
 			return;
 		}
 
@@ -32,6 +23,21 @@ public class InteractableItem : MonoBehaviour
 		}
 		else
 		{
+			InventorySlot inventorySlot = item.Inventory.FindSlotFromItem(item);
+
+			Debug.Log("Inventory Slot: " + inventorySlot);
+			if (inventorySlot != null && item.Consumable)
+			{
+				Debug.Log("Eating consumable");
+				inventorySlot.Item = null;
+				if (item.UseEvent != null)
+				{
+					item.UseEvent.Raise();
+				}
+				Destroy(gameObject);
+				return;
+			}
+
 			// add item to inventory
 			InventorySlot newInventorySlot = item.Inventory.AddItem(item);
 			

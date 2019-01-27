@@ -9,9 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0b1afd787eda0249922fa9181b08800, type: 3}
-  m_Name: Log
+  m_Script: {fileID: 11500000, guid: d81897d1b2ab7764aaf09f9371f29a11, type: 3}
+  m_Name: Use Log
   m_EditorClassIdentifier: 
-  Inventory: {fileID: 0}
-  UseEvent: {fileID: 11400000, guid: 6a432c0f63b9c4e488b9ecade86e4163, type: 2}
-  Consumable: 0
