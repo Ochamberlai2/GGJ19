@@ -1,19 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class WorldItem : MonoBehaviour
 {
-
     [SerializeField]
-    private ItemDefinition definition;
+    private ItemDefinition itemDefinition;
 
-    public void OnEnable()
+    private void OnMouseUp()
     {
-        /*
-         * When the object is enabled, set the item's sprite renderer to the item's sprite 
-         */
-        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = definition.itemSprite;
+        InventoryManager.Instance.AddItemToInventory(itemDefinition);
+        gameObject.SetActive(false);
+    }
+    //called when a variable is changed
+    private void OnValidate()
+    {
+        if (itemDefinition != null)
+        {
+            SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+            spriteRenderer.sprite = itemDefinition.itemSprite;
+            BoxCollider2D collider = GetComponent<BoxCollider2D>();
+            collider.size = spriteRenderer.sprite.bounds.size;
+        }
     }
 }
+

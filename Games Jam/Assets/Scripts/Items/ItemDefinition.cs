@@ -8,6 +8,6 @@ public class ItemDefinition : ScriptableObject
 {
 
     public Sprite itemSprite;
-    public bool canPickup;
+    public Constants.InventorySlotType slotType;
     
 }
