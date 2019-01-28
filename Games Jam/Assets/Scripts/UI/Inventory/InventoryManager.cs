@@ -1,6 +1,7 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class InventoryManager : SerializedMonoBehaviour
 {
@@ -13,6 +14,9 @@ public class InventoryManager : SerializedMonoBehaviour
     private List<ItemDefinition> inventoryItems;
     [SerializeField][TableMatrix][ReadOnly]
     private ItemDefinition[,] inventoryItemArray = new ItemDefinition[2,2];
+
+    public delegate void UpdateUI();
+    public event UpdateUI updateUIEvent;
 
     #region Singleton
     private static InventoryManager instance;
@@ -61,73 +65,78 @@ public class InventoryManager : SerializedMonoBehaviour
      *  This function will add an item to the inventory. It will return false if it cannot add an item to the inventory or true if it has added the item
      */
     [Button]
-     public bool AddItemToInventory(ItemDefinition itemToAdd)
+    public bool AddItemToInventory(ItemDefinition itemToAdd)
     {
-        if (!CanAddToInventory(itemToAdd.slotType))
+        if (itemToAdd == null || !CanAddToInventory(itemToAdd.slotType))
         {
             return false;
         }
-        
-        //If a slot is available, put the item into the inventory
-        if(IsOpenSlot(itemToAdd.slotType))
-        {
-            PlaceItemInSlot(itemToAdd);
-        }
-        else
-        {
-            RecalculateSlotPositions(itemToAdd.slotType);
-            PlaceItemInSlot(itemToAdd);
-        }
+
+        PlaceItemInSlot(itemToAdd);
 
         return true;
 
         /*
-         * If there is an open slot (e.g the slot type is horizontal and it can slot the horizontal item into the inventory without moving any items) return true. 
-         */ 
-        bool IsOpenSlot(Constants.InventorySlotType slotType)
+        * If there is an open slot (e.g the slot type is horizontal and it can slot the horizontal item into the inventory without moving any items) return true. 
+        */ 
+        List<ValueTuple<int, int>> IsOpenSlot(Constants.InventorySlotType slotType)
         {
-            if (slotType == Constants.InventorySlotType.Single)
-                return true;
 
-            if(slotType == Constants.InventorySlotType.Horizontal)
+            for(int i = 0; i < inventoryItemArray.GetLength(0); i++)
             {
-                return (inventoryItemArray[0, 0] == null && inventoryItemArray[0, 1] == null) || (inventoryItemArray[1, 0] == null && inventoryItemArray[1, 1] == null);
-            }
-            if(slotType == Constants.InventorySlotType.Vertical)
-            {
-                return (inventoryItemArray[0, 0] == null && inventoryItemArray[1, 0] == null) || (inventoryItemArray[0, 1] == null && inventoryItemArray[1, 1] == null);
-            }
+                for(int j = 0; j < inventoryItemArray.GetLength(1); j++ )
+                {
+                    if(slotType == Constants.InventorySlotType.Single && inventoryItemArray[i,j] == null)
+                    {
+                        return new List<ValueTuple<int, int>>() { new ValueTuple<int, int>(i, j) };
+                    }
+                    else if(slotType == Constants.InventorySlotType.Horizontal)
+                    {
+                        if(i <= inventoryItemArray.GetLength(0) -2 && inventoryItemArray[i,j] == null && inventoryItemArray[i+1,j] == null)
+                        {
+                            return new List<ValueTuple<int, int>>() { new ValueTuple<int, int>(i,j), new ValueTuple<int, int>(i+1, j)};
+                        }
+                    }
+                    else if(slotType == Constants.InventorySlotType.Vertical)
+                    {
+                        if (j <= inventoryItemArray.GetLength(1) - 2 && inventoryItemArray[i, j] == null && inventoryItemArray[i, j + 1] == null)
+                        {
+                            return new List<ValueTuple<int, int>>() { new ValueTuple<int, int>(i, j), new ValueTuple<int, int>(i, j + 1) };
+                        }
+                    }
 
-            return false;
+                }
+            }
+            return new List<ValueTuple<int, int>>();
         }
         /*
-         * Used in the event that items need to be moved around in order to slot an item into the inventory, this will recalculate item positions
-         */ 
+            * Used in the event that items need to be moved around in order to slot an item into the inventory, this will recalculate item positions
+            */ 
         void RecalculateSlotPositions(Constants.InventorySlotType slotType)
         {
             switch (slotType)
             { 
                 case Constants.InventorySlotType.Horizontal:
-                    for(int i = 0; i < inventoryItemArray.GetLength(0); i++)
+                for(int i = 0; i < inventoryItemArray.GetLength(0); i++)
+                {
+                    if (inventoryItemArray[1, i] != null && inventoryItemArray[0,i] == null)
                     {
-                        if (inventoryItemArray[1, i] != null && inventoryItemArray[0,i] == null)
-                        {
-                            inventoryItemArray[0, i] = inventoryItemArray[1, i];
-                            inventoryItemArray[1, i] = null;
-                        }
+                        inventoryItemArray[0, i] = inventoryItemArray[1, i];
+                        inventoryItemArray[1, i] = null;
                     }
-                    break;
+                }
+                break;
 
                 case Constants.InventorySlotType.Vertical:
-                    for (int i = 0; i < inventoryItemArray.GetLength(1); i++)
+                for (int i = 0; i < inventoryItemArray.GetLength(1); i++)
+                {
+                    if (inventoryItemArray [i,1] != null && inventoryItemArray[i,0] == null)
                     {
-                        if (inventoryItemArray [i,1] != null && inventoryItemArray[i,0] == null)
-                        {
-                            inventoryItemArray[i, 0] = inventoryItemArray[i , 1];
-                            inventoryItemArray[i,1] = null;
-                        }
+                        inventoryItemArray[i, 0] = inventoryItemArray[i , 1];
+                        inventoryItemArray[i,1] = null;
                     }
-                    break;
+                }
+                break;
 
                 default:
                     break;
@@ -135,69 +144,37 @@ public class InventoryManager : SerializedMonoBehaviour
         }
 
         /*
-         * Will find the empty slots and will place an item into them.
-         */ 
+        * Will find the empty slots and will place an item into them.
+        */ 
         void PlaceItemInSlot(ItemDefinition item)
         {
-            switch (item.slotType)
+
+            if(item.slotType != Constants.InventorySlotType.Single)
             {
-                case Constants.InventorySlotType.Single:
-                    for(int i = 0; i < inventoryItemArray.GetLength(0); i++)
-                    {
-                        for(int j = 0; j < inventoryItemArray.GetLength(1); j++)
-                        {
-                            if(inventoryItemArray[i,j] == null)
-                            {
-                                inventoryItemArray[i, j] = item;
-                                currentInventorySlotsOccupied++;
-                                inventoryItems.Add(item);
-                                return;
-                            }
-                        }
-                    }
-                    break;
-
-                case Constants.InventorySlotType.Horizontal:
-                    if (inventoryItemArray[0, 0] == null && inventoryItemArray[0, 1] == null)
-                    {
-                        inventoryItemArray[0, 0] = item;
-                        inventoryItemArray[0, 1] = item;
-                        currentInventorySlotsOccupied += 2;
-                        inventoryItems.Add(item);
-                        return;
-                    }
-                    if(inventoryItemArray[1, 0] == null && inventoryItemArray[1, 1] == null)
-                    {
-                        inventoryItemArray[1, 0] = item;
-                        inventoryItemArray[1, 1] = item;
-                        currentInventorySlotsOccupied += 2;
-                        inventoryItems.Add(item);
-                        return;
-                    }
-                    break;
-
-                case Constants.InventorySlotType.Vertical:
-                    if (inventoryItemArray[0, 0] == null && inventoryItemArray[1, 0] == null)
-                    {
-                        inventoryItemArray[0, 0] = item;
-                        inventoryItemArray[1, 0] = item;
-                        currentInventorySlotsOccupied += 2;
-                        inventoryItems.Add(item);
-                        return;
-                    }
-                     if(inventoryItemArray[0, 1] == null && inventoryItemArray[1, 1] == null)
-                    {
-                        inventoryItemArray[0, 1] = item;
-                        inventoryItemArray[1, 1] = item;
-                        currentInventorySlotsOccupied += 2;
-                        inventoryItems.Add(item);
-                        return;
-                    }
-                    break;
-
-                default:
-                    break;
+                RecalculateSlotPositions(item.slotType);
             }
+
+            List<ValueTuple<int, int>> openPositions = IsOpenSlot(item.slotType);
+
+            if (openPositions.Count == 0)
+            {
+                return;
+            }
+
+            if (item.slotType == Constants.InventorySlotType.Single)
+            {
+                inventoryItemArray[openPositions[0].Item1, openPositions[0].Item2] = item;
+                currentInventorySlotsOccupied++;
+                inventoryItems.Add(item);
+            }
+            else
+            {
+                inventoryItemArray[openPositions[0].Item1, openPositions[0].Item2] = item;
+                inventoryItemArray[openPositions[1].Item1, openPositions[1].Item2] = item;
+                currentInventorySlotsOccupied += 2;
+                inventoryItems.Add(item);
+            }
+            updateUIEvent.Invoke();
         }
     }
 

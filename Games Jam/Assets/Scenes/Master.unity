@@ -6888,11 +6888,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1493316589}
     m_Modifications:
-    - target: {fileID: 6900479042654051959, guid: 7f4d758730d7d1443b3ecd51d2909ede,
-        type: 3}
-      propertyPath: m_Name
-      value: Campfire
-      objectReference: {fileID: 0}
     - target: {fileID: 6900479042654051958, guid: 7f4d758730d7d1443b3ecd51d2909ede,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6947,6 +6942,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6900479042654051959, guid: 7f4d758730d7d1443b3ecd51d2909ede,
+        type: 3}
+      propertyPath: m_Name
+      value: Campfire
       objectReference: {fileID: 0}
     - target: {fileID: 1932519334, guid: 7f4d758730d7d1443b3ecd51d2909ede, type: 3}
       propertyPath: m_Layer
@@ -7420,11 +7420,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1493316589}
     m_Modifications:
-    - target: {fileID: 6900479042654051959, guid: 7f4d758730d7d1443b3ecd51d2909ede,
-        type: 3}
-      propertyPath: m_Name
-      value: Apple
-      objectReference: {fileID: 0}
     - target: {fileID: 6900479042654051958, guid: 7f4d758730d7d1443b3ecd51d2909ede,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7479,6 +7474,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6900479042654051959, guid: 7f4d758730d7d1443b3ecd51d2909ede,
+        type: 3}
+      propertyPath: m_Name
+      value: Apple
       objectReference: {fileID: 0}
     - target: {fileID: 1932519334, guid: 7f4d758730d7d1443b3ecd51d2909ede, type: 3}
       propertyPath: m_IsActive
@@ -7914,11 +7914,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1493316589}
     m_Modifications:
-    - target: {fileID: 6900479042654051959, guid: 7f4d758730d7d1443b3ecd51d2909ede,
-        type: 3}
-      propertyPath: m_Name
-      value: Empty
-      objectReference: {fileID: 0}
     - target: {fileID: 6900479042654051958, guid: 7f4d758730d7d1443b3ecd51d2909ede,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7973,6 +7968,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6900479042654051959, guid: 7f4d758730d7d1443b3ecd51d2909ede,
+        type: 3}
+      propertyPath: m_Name
+      value: Empty
       objectReference: {fileID: 0}
     - target: {fileID: 1932519334, guid: 7f4d758730d7d1443b3ecd51d2909ede, type: 3}
       propertyPath: m_Layer
@@ -8306,11 +8306,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1493316589}
     m_Modifications:
-    - target: {fileID: 6900479042654051959, guid: 7f4d758730d7d1443b3ecd51d2909ede,
-        type: 3}
-      propertyPath: m_Name
-      value: Darkness
-      objectReference: {fileID: 0}
     - target: {fileID: 6900479042654051958, guid: 7f4d758730d7d1443b3ecd51d2909ede,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8365,6 +8360,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6900479042654051959, guid: 7f4d758730d7d1443b3ecd51d2909ede,
+        type: 3}
+      propertyPath: m_Name
+      value: Darkness
       objectReference: {fileID: 0}
     - target: {fileID: 1932519334, guid: 7f4d758730d7d1443b3ecd51d2909ede, type: 3}
       propertyPath: m_Layer
@@ -9422,7 +9422,8 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 11400000, guid: 104caa41f4d0ad141b937c6b463c672a, type: 2}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -9438,14 +9439,14 @@ MonoBehaviour:
       Entry: 1
       Data: 2|2
     - Name: 
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 0
     - Name: 
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 0
     - Name: 
-      Entry: 6
-      Data: 
+      Entry: 10
+      Data: 0
     - Name: 
       Entry: 6
       Data: 
@@ -9456,8 +9457,11 @@ MonoBehaviour:
       Entry: 8
       Data: 
   maxInventorySize: 4
-  currentInventorySlotsOccupied: 0
-  inventoryItems: []
+  currentInventorySlotsOccupied: 3
+  inventoryItems:
+  - {fileID: 11400000, guid: 104caa41f4d0ad141b937c6b463c672a, type: 2}
+  - {fileID: 11400000, guid: 104caa41f4d0ad141b937c6b463c672a, type: 2}
+  - {fileID: 11400000, guid: 104caa41f4d0ad141b937c6b463c672a, type: 2}
 --- !u!1 &1447239212
 GameObject:
   m_ObjectHideFlags: 0
@@ -9753,11 +9757,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1493316589}
     m_Modifications:
-    - target: {fileID: 6900479042654051959, guid: 7f4d758730d7d1443b3ecd51d2909ede,
-        type: 3}
-      propertyPath: m_Name
-      value: 'Darkness #2'
-      objectReference: {fileID: 0}
     - target: {fileID: 6900479042654051958, guid: 7f4d758730d7d1443b3ecd51d2909ede,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9812,6 +9811,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6900479042654051959, guid: 7f4d758730d7d1443b3ecd51d2909ede,
+        type: 3}
+      propertyPath: m_Name
+      value: 'Darkness #2'
       objectReference: {fileID: 0}
     - target: {fileID: 1932519334, guid: 7f4d758730d7d1443b3ecd51d2909ede, type: 3}
       propertyPath: m_Layer
@@ -10245,16 +10249,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1493316589}
     m_Modifications:
-    - target: {fileID: 6900479042654051959, guid: 7f4d758730d7d1443b3ecd51d2909ede,
-        type: 3}
-      propertyPath: m_Name
-      value: Empty
-      objectReference: {fileID: 0}
-    - target: {fileID: 6900479042654051959, guid: 7f4d758730d7d1443b3ecd51d2909ede,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6900479042654051958, guid: 7f4d758730d7d1443b3ecd51d2909ede,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10309,6 +10303,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6900479042654051959, guid: 7f4d758730d7d1443b3ecd51d2909ede,
+        type: 3}
+      propertyPath: m_Name
+      value: Empty
+      objectReference: {fileID: 0}
+    - target: {fileID: 6900479042654051959, guid: 7f4d758730d7d1443b3ecd51d2909ede,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1932519334, guid: 7f4d758730d7d1443b3ecd51d2909ede, type: 3}
       propertyPath: m_Layer
@@ -11099,11 +11103,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1493316589}
     m_Modifications:
-    - target: {fileID: 6900479042654051959, guid: 7f4d758730d7d1443b3ecd51d2909ede,
-        type: 3}
-      propertyPath: m_Name
-      value: Derelict House
-      objectReference: {fileID: 0}
     - target: {fileID: 6900479042654051958, guid: 7f4d758730d7d1443b3ecd51d2909ede,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11158,6 +11157,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6900479042654051959, guid: 7f4d758730d7d1443b3ecd51d2909ede,
+        type: 3}
+      propertyPath: m_Name
+      value: Derelict House
       objectReference: {fileID: 0}
     - target: {fileID: 1932519334, guid: 7f4d758730d7d1443b3ecd51d2909ede, type: 3}
       propertyPath: m_Layer
@@ -13529,11 +13533,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1493316589}
     m_Modifications:
-    - target: {fileID: 6900479042654051959, guid: 7f4d758730d7d1443b3ecd51d2909ede,
-        type: 3}
-      propertyPath: m_Name
-      value: Face your Fears
-      objectReference: {fileID: 0}
     - target: {fileID: 6900479042654051958, guid: 7f4d758730d7d1443b3ecd51d2909ede,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -13588,6 +13587,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6900479042654051959, guid: 7f4d758730d7d1443b3ecd51d2909ede,
+        type: 3}
+      propertyPath: m_Name
+      value: Face your Fears
       objectReference: {fileID: 0}
     - target: {fileID: 1932519334, guid: 7f4d758730d7d1443b3ecd51d2909ede, type: 3}
       propertyPath: m_Layer
