@@ -1,0 +1,11 @@
+From Kianna:
+
+- Some kind of empty inventory slot asset (just some kind of square for when the slot is empty which will be swapped out with the sprite of the collected item);
+- Maybe change the animations for the main characters to coming from sprite sheets + add ones for things like eating the apple etc? (mostly for practice);
+
+
+
+From Heather:
+
+- A list of events that will need to happen (ideally very granular E.g. Lerp character, teleport character, play animation, display dialogue etc).  
+I'm planning on essentially building lists of actions that fire when an event is triggered
