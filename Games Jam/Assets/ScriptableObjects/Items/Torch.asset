@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Torch
   m_EditorClassIdentifier: 
   itemSprite: {fileID: 21300000, guid: 7a73c965e81cf884489ffc96b2a5f0cb, type: 3}
+  uiSprite: {fileID: 21300000, guid: 1dbcc0ebf3b304c47977056da81b1d33, type: 3}
   slotType: 2

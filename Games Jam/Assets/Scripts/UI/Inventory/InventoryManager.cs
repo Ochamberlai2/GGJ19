@@ -220,6 +220,11 @@ public class InventoryManager : SerializedMonoBehaviour
         return true;
     }
 
+    public ItemDefinition[,] GetInventoryMatrix()
+    {
+        return inventoryItemArray;
+    }
+
     /*
      * For debug purposes, clears out the inventory
      */
